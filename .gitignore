@@ -1,0 +1,9 @@
+# Ignore all files
+*
+__pycache__/
+
+# Except for:
+!*.py
+!*.md
+!.gitignore
+!AUTHORS
