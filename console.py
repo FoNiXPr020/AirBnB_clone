@@ -21,10 +21,10 @@ class HBNBCommand(cmd.Cmd):
                  "City", "Amenity", "Place", "Review"]
 
     g_Strings = ["name", "amenity_id", "place_id", "state_id",
-                "user_id", "city_id", "description", "text",
-                "email", "password", "first_name", "last_name"]
+                 "user_id", "city_id", "description", "text",
+                 "email", "password", "first_name", "last_name"]
     g_Intgers = ["number_rooms", "number_bathrooms",
-                "max_guest", "price_by_night"]
+                 "max_guest", "price_by_night"]
 
     g_Flots = ["latitude", "longitude"]
 
@@ -141,7 +141,7 @@ Usage2: all <class name>\n"""
 
     def do_update(self, arg):
         """Updates an instance by adding or updating attribute
-Usage: update <class name> <id> <attribute name> \"<attribute value>\"\n"""
+Usage: update <class> <id> <attribute> \"<value>\"\n"""
         if self.valid(arg, True, True):
             gArgs = arg.split()
             _iKey = gArgs[0]+"."+gArgs[1]
