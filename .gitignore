@@ -9,3 +9,5 @@ __pycache__/
 !AUTHORS
 !tests
 !models
+!tests/test_models/
+!models/engine
