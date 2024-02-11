@@ -198,5 +198,69 @@ class ConsoleTestCase(unittest.TestCase):
                     self.assertCountEqual(expected, f.getvalue().strip())
 
 
+class TestConsole(unittest.TestCase):
+    def setUp(self):
+        self.console = HBNBCommand()
+
+    def tearDown(self):
+        pass
+
+    def test_create(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("create BaseModel")
+            output = f.getvalue().strip()
+            self.assertTrue(output)
+
+    def test_show(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("create BaseModel")
+            obj_id = f.getvalue().strip()
+            self.console.onecmd(f"show BaseModel {obj_id}")
+            output = f.getvalue().strip()
+            self.assertTrue(output)
+
+    def test_destroy(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("create BaseModel")
+            obj_id = f.getvalue().strip()
+            self.console.onecmd(f"destroy BaseModel {obj_id}")
+            self.assertFalse(storage.all().get(f"BaseModel.{obj_id}"))
+
+    def test_all(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("all")
+            output = f.getvalue().strip()
+            self.assertTrue(output)
+
+    def test_update(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("create BaseModel")
+            obj_id = f.getvalue().strip()
+            self.console.onecmd(f"update BaseModel {obj_id} name 'test'")
+            obj = storage.all()["BaseModel.{}".format(obj_id)]
+            self.assertEqual(obj.name, 'test')
+
+    def test_quit(self):
+        with self.assertRaises(SystemExit) as e:
+            self.console.onecmd("quit")
+        self.assertEqual(e.exception.code, None)  # Ensure code is None
+
+    def test_EOF(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertTrue(self.console.onecmd("EOF"))
+
+    def test_emptyline(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(self.console.onecmd("\n"))
+
+    def test_help(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(self.console.onecmd("help"))
+
+    def test_unknown_command(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(self.console.onecmd("unknown_command"))
+
+
 if __name__ == '__main__':
     unittest.main()
