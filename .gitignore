@@ -11,3 +11,4 @@ __pycache__/
 !models
 !tests/test_models/
 !models/engine
+!tests/test_models/test_engine
