@@ -2,16 +2,14 @@
 *
 __pycache__/
 
-# Except for:
+# Except for .c and .h files
 !*.py
 !*.md
 !.gitignore
 !AUTHORS
-!tests
-!models
-!tests/test_models/
-!models/engine
-!tests/test_models/test_engine
-!web_static
-!web_static/styles
+!web_static/
 !web_static/images
+!web_static/styles
+!*.html
+!*.css
+!*.png
