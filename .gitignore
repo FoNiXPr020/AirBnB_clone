@@ -12,3 +12,4 @@ __pycache__/
 !tests/test_models/
 !models/engine
 !tests/test_models/test_engine
+!web_static/*
